@@ -1,0 +1,84 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LifeLine Hospital - Sign In</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header id="top-contact">
+    Contact: <a href="mailto:contact@lifelinehospital.com">contact@lifelinehospital.com</a>
+  </header>
+
+  <nav id="navbar">
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="appointment.html">Appointment</a></li>
+      <li id="auth-link"></li> 
+    </ul>
+  </nav>
+
+  <main>
+    <section id="signin">
+      <h2>Sign In</h2>
+      <form id="signin-form">
+        <label for="signinEmail">Email:</label>
+        <input type="email" id="signinEmail" name="signinEmail" required />
+
+        <label for="signinPassword">Password:</label>
+        <input type="password" id="signinPassword" name="signinPassword" required />
+
+        <button type="submit">Sign In</button>
+      </form>
+      <div id="signin-message" class="message"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Contact us: <a href="mailto:contact@lifelinehospital.com">contact@lifelinehospital.com</a></p>
+    <p>&copy; 2025 LifeLine Hospital</p>
+  </footer>
+
+  <script>
+    // Check if user is logged in
+    const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+    const authLink = document.getElementById("auth-link");
+    
+    if (loggedInUser) {
+      // If logged in, show Logout button
+      authLink.innerHTML = '<a href="#" id="logout-btn">Logout</a>';
+      document.getElementById("logout-btn").addEventListener("click", function () {
+        localStorage.removeItem("loggedInUser"); // Remove session
+        window.location.href = "signin.html"; // Redirect to Sign In
+      });
+
+    } else {
+      // If not logged in, show Sign In
+      authLink.innerHTML = '<a href="signin.html">Sign In</a>';
+    }
+
+    // Sign In Form Handling
+    document.getElementById("signin-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const email = document.getElementById("signinEmail").value.trim();
+      const password = document.getElementById("signinPassword").value.trim();
+
+      let users = JSON.parse(localStorage.getItem("users")) || [];
+      const user = users.find(user => user.email === email && user.password === password);
+
+      if (user) {
+        localStorage.setItem("loggedInUser", JSON.stringify(user));
+        document.getElementById("signin-message").innerText = "Sign in successful!";
+        window.location.href = "appointment.html"; // Redirect to appointment page
+      } else {
+        document.getElementById("signin-message").innerText = "Invalid email or password.";
+      }
+    });
+  </script>
+</body>
+</html>

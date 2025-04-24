@@ -1,0 +1,86 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LifeLine Hospital - Appointment</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header id="top-contact">
+    Contact: <a href="mailto:contact@lifelinehospital.com">contact@lifelinehospital.com</a>
+  </header>
+
+  <nav id="navbar">
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="appointment.html">Appointment</a></li>
+      <li id="auth-link"></li> 
+    </ul>
+  </nav>
+
+  
+  <div id="welcome-message" class="welcome"></div>
+
+  <main>
+    <section id="appointment">
+      <h2>Book an Appointment / Reserve a Room</h2>
+      <form id="appointment-form">
+        <label for="patientName">Name:</label>
+        <input type="text" id="patientName" name="patientName" required />
+
+        <label for="patientEmail">Email:</label>
+        <input type="email" id="patientEmail" name="patientEmail" required />
+
+        <label for="departmentSelect">Department:</label>
+        <select id="departmentSelect" name="departmentSelect" required>
+          <option value="">Select Department</option>
+          <option value="Cardiology">Cardiology</option>
+          <option value="Neurology">Neurology</option>
+          <option value="Orthopedics">Orthopedics</option>
+          <option value="Pediatrics">Pediatrics</option>
+        </select>
+
+        <label for="appointmentDate">Date:</label>
+        <input type="date" id="appointmentDate" name="appointmentDate" required />
+
+        <label for="appointmentTime">Time:</label>
+        <input type="time" id="appointmentTime" name="appointmentTime" required />
+
+        <button type="submit">Submit Appointment</button>
+      </form>
+      <div id="appointment-message" class="message"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Contact us: <a href="mailto:contact@lifelinehospital.com">contact@lifelinehospital.com</a></p>
+    <p>&copy; 2025 LifeLine Hospital</p>
+  </footer>
+
+  <script>
+    
+    const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+    const authLink = document.getElementById("auth-link");
+    
+    if (loggedInUser) {
+      document.getElementById("welcome-message").innerText = `Welcome back, ${loggedInUser.email}!`;
+
+      
+      authLink.innerHTML = '<a href="#" id="logout-btn">Logout</a>';
+      document.getElementById("logout-btn").addEventListener("click", function () {
+        localStorage.removeItem("loggedInUser"); 
+        window.location.href = "signin.html"; 
+      });
+
+    } else {
+    
+      authLink.innerHTML = '<a href="signin.html">Sign In</a>';
+    }
+  </script>
+</body>
+</html>
+

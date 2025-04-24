@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LifeLine Hospital - Admin Login</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header id="top-contact">
+    Contact: <a href="mailto:contact@lifelinehospital.com">contact@lifelinehospital.com</a>
+  </header>
+
+  <nav id="navbar">
+    <ul>
+      <li><a href="/">Home</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section id="admin-login">
+      <h2>Admin Login</h2>
+      <form id="admin-login-form">
+        <label for="adminUsername">Username:</label>
+        <input type="text" id="adminUsername" name="adminUsername" required />
+
+        <label for="adminPassword">Password:</label>
+        <input type="password" id="adminPassword" name="adminPassword" required />
+
+        <button type="submit">Login</button>
+      </form>
+      <div id="admin-login-message" class="message" style="color:red;"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Contact us: <a href="mailto:contact@lifelinehospital.com">contact@lifelinehospital.com</a></p>
+    <p>&copy; 2025 LifeLine Hospital</p>
+  </footer>
+</body>
+</html>
